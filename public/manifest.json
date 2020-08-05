@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Unifey",
+  "name": "The Unifey social media platform.",
   "icons": [
     {
       "src": "favicon.ico",
