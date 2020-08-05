@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Button, Form, Checkbox, message, notification } from "antd";
 import { Link } from "react-router-dom";
 
 export default (): JSX.Element  => {
+    const [loading, setLoading] = useState(false)
     const [form] = Form.useForm();
-    
+
     const signUp = async (values: any) => {
         const { username, email } = values;
+
+        setLoading(true)
 
         let data = new FormData();
         data.append("username", username);
         data.append("email", email);
 
-        let req = await fetch("http://localhost:8077/beta", {
+        let req = await fetch("https://api.unifey.net/beta", {
             method: "PUT",
             body: data
         })
@@ -28,6 +31,8 @@ export default (): JSX.Element  => {
             let json = await req.json()
             message.error(json.payload);
         }
+
+        setLoading(false)
     };
 
     return (
@@ -128,7 +133,7 @@ export default (): JSX.Element  => {
                 </div>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" loading={loading}>
                         Submit
                     </Button>
                 </Form.Item>
